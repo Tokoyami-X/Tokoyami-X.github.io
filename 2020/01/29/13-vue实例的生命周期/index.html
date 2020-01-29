@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="（十三）Vue实例的生命周期13.1     生命周期图​    Vue实例的生命周期中有多个状态。   测试代码  12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&lt;!DOCTYPE html&gt;&lt;html lang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13-vue实例的生命周期">
+<meta property="og:url" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/index.html">
+<meta property="og:site_name" content="常闇Tokoyami的个人博客">
+<meta property="og:description" content="（十三）Vue实例的生命周期13.1     生命周期图​    Vue实例的生命周期中有多个状态。   测试代码  12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&lt;!DOCTYPE html&gt;&lt;html lang">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/lifecycle.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/9.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/10.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/11.png">
+<meta property="article:published_time" content="2020-01-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-11-12T13:29:22.000Z">
+<meta property="article:author" content="常闇Tokoyami">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/images/lifecycle.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>13-vue实例的生命周期 | 常闇Tokoyami的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">常闇Tokoyami的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/29/13-vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="常闇Tokoyami">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="常闇Tokoyami的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          13-vue实例的生命周期
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-29T00:00:00+08:00">2020-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-12 21:29:22" itemprop="dateModified" datetime="2019-11-12T21:29:22+08:00">2019-11-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="（十三）Vue实例的生命周期"><a href="#（十三）Vue实例的生命周期" class="headerlink" title="（十三）Vue实例的生命周期"></a>（十三）Vue实例的生命周期</h1><h2 id="13-1-生命周期图"><a href="#13-1-生命周期图" class="headerlink" title="13.1     生命周期图"></a>13.1     <span id="top">生命周期图</span></h2><p>​    Vue实例的生命周期中有多个状态。</p>
+<p><img src="./images/lifecycle.png" alt="生命周期图"></p>
+<blockquote>
+<p>测试代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Vue实例的生命周期<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 引入vue.js --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>测试生命周期<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>测试beforeUpdate和update两个钩子函数<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"handlerUpdate"</span>&gt;</span>更新数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">            el:<span class="string">"#app"</span>,</span></span><br><span class="line">            data:&#123;</span><br><span class="line"><span class="actionscript">                msg:<span class="string">"12345"</span></span></span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line"><span class="actionscript">                handlerUpdate:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="keyword">this</span>.msg=<span class="keyword">this</span>.msg.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>);</span></span><br><span class="line">                &#125;,</span><br><span class="line"><span class="actionscript">            &#125;,<span class="comment">//按照示意图依次调用</span></span></span><br><span class="line"><span class="actionscript">            beforeCreate:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了beforeCreate钩子函数"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            created:<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了created钩子函数"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            beforeMount: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'调用了beforeMount钩子函数'</span>)</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            mounted: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'调用了mounted钩子函数'</span>)</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            beforeUpdate: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了beforeUpdate钩子函数"</span>)</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            updated: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了updated钩子函数"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            beforeDestroy: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了beforeDestroy钩子函数"</span>)</span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            destroyed: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">"调用了destroyed钩子函数"</span>);</span></span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如图所示：</p>
+<p><img src="./images/1.png" alt="reslut"></p>
+<p>初始化页面依次调用了：</p>
+<blockquote>
+<ol>
+<li>调用了beforeCreate钩子函数</li>
+<li>调用了created钩子函数</li>
+<li>调用了beforeMount钩子函数</li>
+<li>调用了mounted钩子函数</li>
+</ol>
+</blockquote>
+<p>点击更新数据后：</p>
+<p><code>12345</code>变成了<code>54321</code>，此时调用了：</p>
+<blockquote>
+<ol>
+<li>调用了beforeUpdate钩子函数</li>
+<li>调用了updated钩子函数</li>
+</ol>
+</blockquote>
+<p>打开F12控制台<br>直接输入<code>app.$destroy()</code>主动销毁Vue实例调用：</p>
+<blockquote>
+<ol>
+<li>调用了beforeDestroy钩子函数</li>
+<li>调用了destroyed钩子函数</li>
+</ol>
+</blockquote>
+<h2 id="13-2-再探究"><a href="#13-2-再探究" class="headerlink" title="13.2    再探究"></a>13.2    再探究</h2><h3 id="13-2-1-beforeCreate之前"><a href="#13-2-1-beforeCreate之前" class="headerlink" title="13.2.1    beforeCreate之前"></a>13.2.1    beforeCreate之前</h3><p>初始化钩子函数和生命周期</p>
+<h3 id="13-2-2-beforeCreate和created钩子函数间的生命周期"><a href="#13-2-2-beforeCreate和created钩子函数间的生命周期" class="headerlink" title="13.2.2    beforeCreate和created钩子函数间的生命周期"></a>13.2.2    beforeCreate和created钩子函数间的生命周期</h3><p>在beforeCreate和created之间，进行数据观测(data observer) ，也就是在这个时候开始监控data中的数据变化了，同时初始化事件。<br><span style="float:right;"><a href="#1">生命周期展示图</a></span></p>
+<h3 id="13-2-3-created钩子函数和beforeMount间的生命周期"><a href="#13-2-3-created钩子函数和beforeMount间的生命周期" class="headerlink" title="13.2.3    created钩子函数和beforeMount间的生命周期"></a>13.2.3    created钩子函数和beforeMount间的生命周期</h3><p>对于created钩子函数和beforeMount有判断：<br><img src="./images/2.png" alt="2"></p>
+<h4 id="13-2-3-1el选项对生命周期影响"><a href="#13-2-3-1el选项对生命周期影响" class="headerlink" title="13.2.3.1el选项对生命周期影响"></a>13.2.3.1el选项对生命周期影响</h4><blockquote>
+<ol>
+<li>有el选项</li>
+</ol>
+</blockquote>
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})</code></pre><p>结果:<br><img src="./images/3.png" alt="有el"></p>
+<blockquote>
+<ol start="2">
+<li>无el选项</li>
+</ol>
+</blockquote>
+<pre><code>new Vue({
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})</code></pre><p>结果：<br><img src="./images/4.png" alt="无el"></p>
+<blockquote>
+<p>证明没有el选项，则停止编译，也意味着暂时停止了生命周期。生命周期到created钩子函数就结束了。而当我们不加el选项，但是手动执行vm.$mount(el)方法的话，也能够使暂停的生命周期进行下去，例如：</p>
+</blockquote>
+<pre><code>var app = new Vue({
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})
+app.$mount(&apos;#app&apos;)</code></pre><p>结果：<br><img src="./images/3.png" alt="有el"></p>
+<h4 id="13-2-3-2-template"><a href="#13-2-3-2-template" class="headerlink" title="13.2.3.2    template"></a>13.2.3.2    template</h4><p><img src="./images/5.png" alt="template"></p>
+<blockquote>
+<p>同时使用<code>template</code>和<code>HTML</code>，查看优先级：</p>
+</blockquote>
+<pre><code>&lt;h1&gt;测试template和HTML的优先级&lt;/h1&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;p&gt;HTML优先&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = new Vue({
+        el:&quot;#app&quot;,
+        data:{
+            msg:&quot;template优先&quot;
+        },
+        template:&quot;&lt;p&gt;{{msg}}&lt;/p&gt;&quot;,
+    });
+&lt;/script&gt;</code></pre><p>结果：<br><img src="./images/6.png" alt="template"></p>
+<blockquote>
+<p>结论</p>
+</blockquote>
+<ol>
+<li>如果Vue实例对象中有template参数选项，则将其作为模板编译成render函数</li>
+<li>如果没有template参数选项，则将外部的HTML作为模板编译（template），也就是说，template参数选项的优先级要比外部的HTML高</li>
+<li>如果1,2条件都不具备，则报错</li>
+</ol>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<ol>
+<li>Vue需要通过el去找对应的template，Vue实例通过el的参数，首先找自己有没有template，如果没有再去找外部的html，找到后将其编译成render函数。</li>
+<li>也可以直接调用<a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render</a>选项，优先级：<code>render函数选项  &gt; template参数  &gt; 外部HTML</code>。</li>
+</ol>
+<hr>
+
+
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    render (createElement) {
+        return (....)
+    }
+})</code></pre><h3 id="13-2-4-beforeMount和mounted钩子函数间的生命周期"><a href="#13-2-4-beforeMount和mounted钩子函数间的生命周期" class="headerlink" title="13.2.4    beforeMount和mounted钩子函数间的生命周期"></a>13.2.4    beforeMount和mounted钩子函数间的生命周期</h3><p><img src="./images/7.png" alt="7"></p>
+<blockquote>
+<p>beforeMount</p>
+</blockquote>
+<p>载入前（完成了data和el数据初始化），但是页面中的内容还是vue中的占位符，data中的message信息没有被挂在到Dom节点中，在这里可以在渲染前最后一次更改数据的机会，不会触发其他的钩子函数，一般可以在这里做初始数据的获取。</p>
+<blockquote>
+<p>Mount</p>
+</blockquote>
+<p>载入后html已经渲染(ajax请求可以放在这个函数中)，把vue实例中的data里的message挂载到DOM节点中去</p>
+<blockquote>
+<p>这里两个钩子函数间是载入数据。</p>
+</blockquote>
+<h3 id="13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期"></a>13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期</h3><p><img src="./images/8.png" alt="8"><br>在Vue中，修改数据会导致重新渲染，依次调用beforeUpdate钩子函数和updated钩子函数</p>
+<p>如果待修改的数据没有载入模板中，不会调用这里两个钩子函数</p>
+<pre><code>var app = new Vue({
+    el: &apos;#app&apos;,
+    data: {
+        msg: 1
+    },
+    template: &apos;&lt;div id=&quot;app&quot;&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;&apos;,
+    beforeUpdate: function () {
+        console.log(&apos;调用了beforeUpdate钩子函数&apos;)
+    },
+    updated: function () {
+        console.log(&apos;调用了updated钩子函数&apos;)
+    }
+})
+app.msg = 2</code></pre><p>结果：<br><img src="./images/9.png" alt="9"><br>如果绑定了数据，会调用两个钩子函数：</p>
+<pre><code>&lt;h1&gt;测试有数据绑定修改数据，钩子函数调用情况&lt;/h1&gt;
+&lt;div id=&quot;app&quot;&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = new Vue({
+        el:&quot;#app&quot;,
+        template:&quot;&lt;p&gt;{{msg}}&lt;/p&gt;&quot;,
+        data:{
+            msg:&quot;原数据&quot;
+        },
+        beforeUpdate: function () {
+            console.log(&quot;调用了beforeUpdate钩子函数&quot;)
+        },
+        updated: function () {
+            console.log(&quot;调用了updated钩子函数&quot;);
+        },
+    });
+    app.msg = &quot;数据被修改了&quot;;
+&lt;/script&gt;</code></pre><p>结果：<br><img src="./images/10.png" alt="10"></p>
+<blockquote>
+<p>注意只有写入模板的数据才会被追踪</p>
+</blockquote>
+<h3 id="13-2-6-beforeDestroy和destroyed钩子函数间的生命周期"><a href="#13-2-6-beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="13.2.6    beforeDestroy和destroyed钩子函数间的生命周期"></a>13.2.6    beforeDestroy和destroyed钩子函数间的生命周期</h3><p><img src="./images/11.png" alt="11"></p>
+<h4 id="13-2-6-1-beforeDestroy"><a href="#13-2-6-1-beforeDestroy" class="headerlink" title="13.2.6.1    beforeDestroy"></a>13.2.6.1    beforeDestroy</h4><p>销毁前执行（$destroy方法被调用的时候就会执行）,一般在这里善后:清除计时器、清除非指令绑定的事件等等…’)</p>
+<h4 id="13-2-6-2-destroyed"><a href="#13-2-6-2-destroyed" class="headerlink" title="13.2.6.2    destroyed"></a>13.2.6.2    destroyed</h4><p>销毁后 （Dom元素存在，只是不再受vue控制）,卸载watcher，事件监听，子组件</p>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<ul>
+<li>beforecreate : 可以在这加个loading事件</li>
+<li>created ：在这结束loading，还做一些初始数据的获取，实现函数自-执行</li>
+<li>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情</li>
+<li>beforeDestroy： 你确认删除XX吗？</li>
+<li>destroyed ：当前组件已被删除，清空相关内容</li>
+</ul>
+<hr>
+<div>
+  <span style="float:left;"><a href="#top">返回顶部</a></span><span style="float:right;"><a href="../README.md">返回首页</a></span>
+</div>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/29/15-webpack/" rel="prev" title="15-webpack">
+      <i class="fa fa-chevron-left"></i> 15-webpack
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="next" title="14-前端模块化">
+      14-前端模块化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（十三）Vue实例的生命周期"><span class="nav-number">1.</span> <span class="nav-text">（十三）Vue实例的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-1-生命周期图"><span class="nav-number">1.1.</span> <span class="nav-text">13.1     生命周期图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-2-再探究"><span class="nav-number">1.2.</span> <span class="nav-text">13.2    再探究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-1-beforeCreate之前"><span class="nav-number">1.2.1.</span> <span class="nav-text">13.2.1    beforeCreate之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-2-beforeCreate和created钩子函数间的生命周期"><span class="nav-number">1.2.2.</span> <span class="nav-text">13.2.2    beforeCreate和created钩子函数间的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-3-created钩子函数和beforeMount间的生命周期"><span class="nav-number">1.2.3.</span> <span class="nav-text">13.2.3    created钩子函数和beforeMount间的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-3-1el选项对生命周期影响"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">13.2.3.1el选项对生命周期影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-3-2-template"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">13.2.3.2    template</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-4-beforeMount和mounted钩子函数间的生命周期"><span class="nav-number">1.2.4.</span> <span class="nav-text">13.2.4    beforeMount和mounted钩子函数间的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期"><span class="nav-number">1.2.5.</span> <span class="nav-text">13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-6-beforeDestroy和destroyed钩子函数间的生命周期"><span class="nav-number">1.2.6.</span> <span class="nav-text">13.2.6    beforeDestroy和destroyed钩子函数间的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-6-1-beforeDestroy"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">13.2.6.1    beforeDestroy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-6-2-destroyed"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">13.2.6.2    destroyed</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">常闇Tokoyami</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">常闇Tokoyami</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
