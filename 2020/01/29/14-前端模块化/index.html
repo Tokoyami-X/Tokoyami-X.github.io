@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | 常闇Tokoyami的个人博客</title>
+  <title>14-前端模块化 | 常闇Tokoyami的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="常闇Tokoyami的个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="（十三）前端模块化14.1    为什么要有模块化​    随着前端项目越来越大，团队人数越来越多，多人协调开发一个项目成为常态。例如现在小明和小张共同开发一个项目，小明定义一个aaa.js，小张定义了一个bbb.js。  aaa.js  1234567891011&#x2F;&#x2F;小明开发var name &#x3D; &#39;小明&#39;var age &#x3D; 22function sum(num1, num2) &amp;#123;  r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14-前端模块化">
+<meta property="og:url" content="http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="常闇Tokoyami的个人博客">
+<meta property="og:description" content="（十三）前端模块化14.1    为什么要有模块化​    随着前端项目越来越大，团队人数越来越多，多人协调开发一个项目成为常态。例如现在小明和小张共同开发一个项目，小明定义一个aaa.js，小张定义了一个bbb.js。  aaa.js  1234567891011&#x2F;&#x2F;小明开发var name &#x3D; &#39;小明&#39;var age &#x3D; 22function sum(num1, num2) &amp;#123;  r">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/images/14.4-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/images/14.4-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/images/14.4-3.png">
+<meta property="article:published_time" content="2020-01-29T08:10:24.282Z">
+<meta property="article:modified_time" content="2019-11-12T13:29:22.000Z">
 <meta property="article:author" content="常闇Tokoyami">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/images/14.4-1.png">
   
     <link rel="alternative" href="/atom.xml" title="常闇Tokoyami的个人博客" type="application/atom+xml">
   
@@ -150,103 +158,261 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-14-前端模块化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      14-前端模块化
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/" class="archive-article-date">
+
+        
+        <a href="/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/" class="archive-article-date">
   	<time datetime="2020-01-29T08:10:24.282Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-29</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/">14-前端模块化</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="（十三）前端模块化"><a href="#（十三）前端模块化" class="headerlink" title="（十三）前端模块化"></a>（十三）前端模块化</h1><h2 id="14-1-为什么要有模块化"><a href="#14-1-为什么要有模块化" class="headerlink" title="14.1    为什么要有模块化"></a>14.1    为什么要有模块化</h2><p>​    随着前端项目越来越大，团队人数越来越多，多人协调开发一个项目成为常态。例如现在小明和小张共同开发一个项目，小明定义一个aaa.js，小张定义了一个bbb.js。</p>
+<blockquote>
+<p>aaa.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小明开发</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'小明'</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">22</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">20</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>此时小明的<code>sum</code>是没有问题的。</p>
+<blockquote>
+<p>bbb.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小红</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"小红"</span></span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
+<p>此时小明和小红各自用各自的<code>flag</code>你变量没问题。</p>
+<blockquote>
+<p>但是此时小明又创建了一个mmm.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小明</span></span><br><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"flag是true"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在index.html页面导入这些js文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;aaa.js&quot; &gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;bbb.js&quot; &gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;ccc.js&quot; &gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时小明知道自己在aaa.js中定义的<code>flag</code>是<code>true</code>，认为打印没有问题，但是不知道小红的bbb.js中也定义了<code>flag</code>为<code>true</code>，所以mmm.js文件并没有打印出“flag是true”。</p>
+<blockquote>
+<p>这就是全局变量同名问题。</p>
+</blockquote>
+<h2 id="14-2-使用导出全局变量模块解决全局变量同名问题"><a href="#14-2-使用导出全局变量模块解决全局变量同名问题" class="headerlink" title="14.2    使用导出全局变量模块解决全局变量同名问题"></a>14.2    使用导出全局变量模块解决全局变量同名问题</h2><blockquote>
+<p>aaa.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块对象</span></span><br><span class="line"><span class="keyword">var</span> moduleA = (<span class="function"><span class="keyword">function</span> (<span class="params">param</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//导出对象</span></span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'小明'</span></span><br><span class="line">  <span class="keyword">var</span> age = <span class="number">22</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> flag = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line">  &#125;</span><br><span class="line">  obj.flag=<span class="literal">false</span></span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mmm.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小明</span></span><br><span class="line"><span class="comment">//使用全局变量moduleA</span></span><br><span class="line"><span class="keyword">if</span>(moduleA.flag)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"flag是true"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样直接使用aaa.js导出的moduleA变量获取小明自己定义的<code>flag</code>。</p>
+<h2 id="14-3-CommonJS的模块化实现"><a href="#14-3-CommonJS的模块化实现" class="headerlink" title="14.3 CommonJS的模块化实现"></a>14.3 CommonJS的模块化实现</h2><p>​    CommonJS需要nodeJS的依支持。</p>
+<blockquote>
+<p>aaa.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CommonJS需要nodeJS支持</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'小明'</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">22</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// module.exports = &#123;</span></span><br><span class="line"><span class="comment">//   flag : flag,</span></span><br><span class="line"><span class="comment">//   sum : sum</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">//导出对象</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  flag,</span><br><span class="line">  sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>module.exports = {}</code>导出需要的对象。</p>
+<blockquote>
+<p>mmm.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入对象,nodejs语法,需要node支持,从aaa.js取出对象</span></span><br><span class="line"><span class="keyword">var</span> &#123;flag,sum&#125; = <span class="built_in">require</span>(<span class="string">"./aaa"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">10</span>,<span class="number">20</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"flag is true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>var {flag,sum} = require(&quot;./aaa&quot;)</code>获取已经导出的对象中自己所需要的对象。</p>
+<h2 id="ES6的模块化实现"><a href="#ES6的模块化实现" class="headerlink" title="ES6的模块化实现"></a>ES6的模块化实现</h2><p>​    如何实现模块化，在html中需要使用<code>type=&#39;module&#39;</code>属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"aaa.js"</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bbb.js"</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"mmm.js"</span> <span class="attr">type</span>=<span class="string">"module"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时表示aaa.js是一个单独的模块，此模块是有作用域的。如果要使用aaa.js内的变量，需要在aaa.js中先导出变量，再在需要使用的地方导出变量。</p>
+<h3 id="14-4-1-直接导出"><a href="#14-4-1-直接导出" class="headerlink" title="14.4.1    直接导出"></a>14.4.1    直接导出</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> name = <span class="string">'小明'</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;name&#125; <span class="keyword">from</span> <span class="string">'./aaa.js'</span></span><br><span class="line"><span class="built_in">console</span>.log(name)</span><br></pre></td></tr></table></figure>
+
+<p><code>./aaa.js</code>表示aaa.js和mmm.js在同级目录。</p>
+<p>如图打印结果。</p>
+<p><img src="./images/14.4-1.png" alt=""></p>
+<h3 id="14-4-2-统一导出"><a href="#14-4-2-统一导出" class="headerlink" title="14.4.2    统一导出"></a>14.4.2    统一导出</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">22</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//2.最后统一导出</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  flag,sum,age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<code>import {name,flag,sum} from &#39;./aaa.js&#39;</code>导入多个变量</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;name,flag,sum&#125; <span class="keyword">from</span> <span class="string">'./aaa.js'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"小明是天才"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">20</span>,<span class="number">30</span>));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用{}将需要的变量放置进去</p>
+</blockquote>
+<p><img src="./images/14.4-2.png" alt=""></p>
+<h3 id="14-4-3-导出函数-类"><a href="#14-4-3-导出函数-类" class="headerlink" title="14.4.3    导出函数/类"></a>14.4.3    导出函数/类</h3><blockquote>
+<p>在aaa.js中添加</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3.导出函数/类</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">  run()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"奔跑"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在mmm.js中添加</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;name,flag,sum,say,Person&#125; <span class="keyword">from</span> <span class="string">'./aaa.js'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"小明是天才"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">20</span>,<span class="number">30</span>));</span><br><span class="line"></span><br><span class="line">say(<span class="string">'hello'</span>)</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> Person();</span><br><span class="line">p.run();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如图</p>
+</blockquote>
+<p><img src="./images/14.4-3.png" alt=""></p>
+<h3 id="14-4-4-默认导入-export-default"><a href="#14-4-4-默认导入-export-default" class="headerlink" title="14.4.4    默认导入 export default"></a>14.4.4    默认导入 export default</h3><blockquote>
+<p>导出</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  flag,sum,age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>导入</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//4.默认导入 export default</span></span><br><span class="line"><span class="keyword">import</span> aaa <span class="keyword">from</span> <span class="string">'./aaa.js'</span></span><br><span class="line"><span class="built_in">console</span>.log(aaa.sum(<span class="number">10</span>,<span class="number">110</span>));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：使用默认导出会将所有需要导出的变量打包成一个对象，此时导出一个对象，此时我在<code>mmm.js</code>中导入变量时候命名为aaa，如果要调用变量需要使用aaa.变量。</p>
+</blockquote>
+<h3 id="14-4-5-统一全部导入"><a href="#14-4-5-统一全部导入" class="headerlink" title="14.4.5    统一全部导入"></a>14.4.5    统一全部导入</h3><blockquote>
+<p>​    使用<code>import * as aaa from &#39;./aaa.js&#39;</code>统一全部导入</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5.统一全部导入</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> aaa <span class="keyword">from</span> <span class="string">'./aaa.js'</span></span><br><span class="line"><span class="built_in">console</span>.log(aaa.flag);</span><br><span class="line"><span class="built_in">console</span>.log(aaa.name);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/29/14-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-01-29T07:54:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第一个博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/29/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">第一个博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/26/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-26T07:56:31.550Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/26/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -269,8 +435,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
